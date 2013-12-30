@@ -42,7 +42,7 @@ done < <(cat urls.txt)
 if [ -n "$updated" ]
 then
     echo -e "Changes were discovered!\n"
-    echo -e "Sending email to $(whoami):" $updated "\n"
+    echo -e "Sending email to $(whoami) with the following updated pages:" $updated "\n"
     echo -e $updated | mail -s "Updated websites $(date "+%b %d %Y")" `whoami`@`hostname`
 fi
 
