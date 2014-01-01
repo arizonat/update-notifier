@@ -2,14 +2,11 @@ DIFF_FOLDER=./old_diffs
 
 updated=""
 
-
-
-
 echo
 while read line
 do
-    author=`echo $line | awk -F';' '{print $1}'`
-    url=`echo $line | awk -F';' '{print $2}'`
+    author=`echo $line | awk -F';' '{print $1}' | tr -d [[:space:]]`
+    url=`echo $line | awk -F';' '{print $2}' | tr -d [[:space:]]`
 
     echo -e "Checking" $author...
     echo $url
@@ -45,5 +42,5 @@ if [ -n "$updated" ]
 then
     echo -e "Changes were discovered!\n"
     echo -e "Sending email to $(whoami):" $updated "\n"
-    echo -e $updated | mail -s "Updated websites $(date "+%b %d %Y")" `whoami`@`hostname`
+    echo -e "--------------------\n"$updated"\n----------------------" | mail -s "Updated websites $(date "+%b %d %Y")" `whoami`@`hostname`
 fi
